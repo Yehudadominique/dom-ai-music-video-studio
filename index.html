@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOM AI Music Video Studio</title>
+<style>
+:root{--bg:#090912;--panel:#151522;--purple:#9b5cff;--text:#f5f3ff;--muted:#aaa8bd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:24px 18px;background:linear-gradient(130deg,#241044,#10101f 75%);border-bottom:1px solid #39304f}
+.logo{font-size:12px;letter-spacing:3px;color:#c8a8ff}
+h1{font-size:27px;margin:12px 0}
+p{line-height:1.6}
+header p{color:#d0c7e6;font-size:14px}
+main{max-width:850px;margin:auto;padding:18px}
+.card{background:var(--panel);border:1px solid #302b43;border-radius:16px;padding:18px;margin-bottom:16px}
+h2{font-size:18px;margin:0 0 16px}
+label{display:block;font-size:13px;color:#d6cce9;margin:14px 0 7px}
+input,select,textarea{width:100%;padding:12px;background:#0c0c17;color:white;border:1px solid #39344d;border-radius:9px;font:inherit}
+textarea{min-height:85px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{border:0;border-radius:9px;padding:12px 15px;font-weight:bold;cursor:pointer}
+.primary{background:var(--purple);color:white;width:100%;margin-top:18px}
+.secondary{background:#302442;color:white;border:1px solid #55406f}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.result{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;font-size:14px;color:#e7e0f7}
+.scene{padding:14px;margin:12px 0;background:#0e0e19;border:1px solid #343047;border-radius:10px}
+.scene h3{font-size:15px;color:#c6a3ff;margin:0 0 8px}
+.small{font-size:12px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);padding:20px;font-size:12px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">DOM CREATOR PRESENTS</div>
+<h1>🎬 DOM AI Music Video Studio</h1>
+<p>Turn your music into a cinematic visual experience.</p>
+</header>
+<main>
+<section class="card">
+<h2>01 / Project Setup</h2>
+<label>Judul lagu</label>
+<input id="song" placeholder="Contoh: Beyond the Future">
+<div class="grid">
+<div>
+<label>Genre musik</label>
+<select id="genre">
+<option>Epic Metal</option><option>Rock</option>
+<option>Symphonic Metal</option><option>Worship</option>
+<option>Pop</option><option>Cinematic Instrumental</option>
+<option>Electronic</option>
+</select>
+</div>
+<div>
+<label>Durasi lagu</label>
+<select id="duration">
+<option value="60">1 menit</option>
+<option value="180">3 menit</option>
+<option value="300" selected>5 menit</option>
+<option value="600">10 menit</option>
+</select>
+</div>
+</div>
+<label>Konsep cerita</label>
+<textarea id="story" placeholder="Contoh: Pejuang Tuhan menghadapi perang futuristik, langit gelap, elang raksasa dan kota megah."></textarea>
+<div class="grid">
+<div>
+<label>Gaya visual</label>
+<select id="style">
+<option>Cinematic 8K</option><option>Dark Fantasy</option>
+<option>Futuristic Sci-Fi</option><option>Epic Medieval</option>
+<option>Realistic DSLR</option><option>Post-Apocalyptic</option>
+</select>
+</div>
+<div>
+<label>Format video</label>
+<select id="ratio">
+<option>16:9 Landscape</option><option>9:16 Vertical</option>
+<option>1:1 Square</option>
+</select>
+</div>
+</div>
+<label>Karakter utama / identitas visual</label>
+<textarea id="character" placeholder="Contoh: Empat personel band, wajah dan pakaian harus konsisten di semua adegan."></textarea>
+<button class="primary" onclick="generate()">✨ GENERATE STORYBOARD</button>
+</section>
+<section class="card">
+<h2>02 / AI Storyboard</h2>
+<div id="output" class="result">Storyboard Anda akan muncul di sini setelah menekan Generate Storyboard.</div>
+<div class="actions">
+<button class="secondary" onclick="copyResult()">📋 Salin storyboard</button>
+<button class="secondary" onclick="downloadResult()">⬇ Simpan TXT</button>
+</div>
+</section>
+<section class="card">
+<h2>03 / Tips Produksi</h2>
+<p class="small">1. Siapkan foto referensi karakter yang jelas.</p>
+<p class="small">2. Gunakan foto referensi yang sama untuk setiap adegan jika alat video mendukungnya.</p>
+<p class="small">3. Buat klip pendek per adegan, lalu gabungkan dengan musik di editor video.</p>
+<p class="small">4. Prompt dibuat oleh aplikasi ini; pembuatan video aktual memerlukan layanan AI video terpisah.</p>
+</section>
+</main>
+<footer>DOM AI MUSIC VIDEO STUDIO · CREATIVE WORKSPACE</footer>
+<script>
+function generate(){
+const song=document.getElementById('song').value.trim()||'Untitled Music Video';
+const genre=document.getElementById('genre').value;
+const duration=Number(document.getElementById('duration').value);
+const story=document.getElementById('story').value.trim()||'A hero journeys through a mysterious world and faces an ultimate challenge.';
+const style=document.getElementById('style').value;
+const ratio=document.getElementById('ratio').value;
+const character=document.getElementById('character').value.trim()||'Maintain the same lead character throughout.';
+const count=Math.max(4,Math.ceil(duration/15));
+let result='PROJECT: '+song+'\nGENRE: '+genre+'\nSTYLE: '+style+'\nFORMAT: '+ratio+'\n\nMASTER VISUAL PROMPT\n';
+result+='Create a cohesive cinematic music video for "'+song+'", in the '+genre+' genre. Visual style: '+style+'. Aspect ratio: '+ratio+'. Story: '+story+'. '+character+' Maintain consistent faces, costumes, age, and physical features across every shot. Dramatic lighting, detailed environments, expressive camera movement, coherent geography, professional color grading. No random character redesign, no unintended text, no logos.\n\nSTORYBOARD\n';
+for(let i=0;i<count;i++){
+const start=Math.round(i*duration/count);
+const end=Math.min(duration,Math.round((i+1)*duration/count));
+const progress=i/(count-1);
+let phase,visual,camera;
+if(progress<0.2){phase='INTRODUCTION';visual='Establish the world, atmosphere, main character and emotional tone.';camera='Slow cinematic establishing shot, controlled push-in.'}
+else if(progress<0.45){phase='BUILD-UP';visual='Reveal the conflict, escalating tension and striking environmental details.';camera='Tracking shot, low-angle framing, dynamic movement.'}
+else if(progress<0.75){phase='CLIMAX';visual='Deliver the most powerful visual moment, intense action, dramatic light and emotional impact.';camera='Wide epic shot followed by deliberate close-ups and energetic movement.'}
+else{phase='RESOLUTION';visual='Resolve the journey with a memorable final image and cinematic atmosphere.';camera='Slow pull-back, atmospheric wide shot, gradual fade-out.'}
+result+='\nSCENE '+(i+1)+' — '+phase+' ('+stamp(start)+'–'+stamp(end)+')\n';
+result+='Visual: '+visual+'\n';
+result+='Story connection: '+story+'\n';
+result+='Camera: '+camera+'\n';
+result+='Lighting: '+(progress<0.5?'Moody shadows, atmospheric haze and controlled highlights.':'High-contrast cinematic light, volumetric beams and rich depth.')+'\n';
+result+='Prompt (English): '+style+', '+genre+' music video, '+visual+' Story context: '+story+'. Character consistency: '+character+'. '+camera+' Highly detailed cinematic composition, realistic motion, coherent scene continuity, professional color grading, '+ratio+'.\n';
+result+='Negative prompt: changing face, inconsistent identity, extra fingers, distorted anatomy, flicker, jitter, blurry details, random costume changes, unreadable text, watermark.\n';
+}
+document.getElementById('output').textContent=result;
+}
+function stamp(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function copyResult(){
+const text=document.getElementById('output').textContent;
+if(!text||text.startsWith('Storyboard Anda')){alert('Buat storyboard terlebih dahulu.');return}
+if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Storyboard berhasil disalin.')).catch(()=>fallbackCopy(text))}
+else fallbackCopy(text);
+}
+function fallbackCopy(text){
+const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();
+try{document.execCommand('copy');alert('Silakan periksa apakah teks berhasil disalin.')}catch(e){alert('Pilih dan salin teks storyboard secara manual.')}
+area.remove();
+}
+function downloadResult(){
+const text=document.getElementById('output').textContent;
+if(!text||text.startsWith('Storyboard Anda')){alert('Buat storyboard terlebih dahulu.');return}
+const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');a.href=url;a.download='DOM-AI-Storyboard.txt';a.click();
+URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
