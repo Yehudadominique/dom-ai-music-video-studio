@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+  <title>DOM AI Music Video Studio</title>
+  <style>
+    :root{--bg:#090b14;--panel:#121625;--panel2:#191f31;--line:#2a3147;--text:#f4f6ff;--muted:#9ba5bd;--purple:#8b5cf6;--pink:#ec4899;--cyan:#22d3ee}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#25204b 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+    button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:34px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--pink));font-size:21px;box-shadow:0 8px 30px #8b5cf655}.tag{font-size:11px;color:#d8ccff;border:1px solid #6652a0;padding:6px 10px;border-radius:30px}
+    .hero{text-align:center;margin:20px auto 30px;max-width:760px}.eyebrow{color:#c4b5fd;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.06;margin:12px 0;background:linear-gradient(90deg,#fff,#c4b5fd 55%,#f9a8d4);background-clip:text;color:transparent}.hero p{color:var(--muted);line-height:1.7;margin:0 auto;max-width:620px}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:linear-gradient(160deg,#171d2e,#101421);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 18px 50px #0003}.card h2{font-size:17px;margin:0 0 5px}.sub{font-size:12px;color:var(--muted);margin:0 0 20px}.field{margin:16px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.field textarea,.field input,.field select{width:100%;border:1px solid var(--line);border-radius:12px;background:#0c1020;color:var(--text);padding:13px;outline:none}.field textarea{min-height:118px;resize:vertical}.field textarea:focus,.field input:focus,.field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #8b5cf622}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.primary{width:100%;border:0;border-radius:12px;padding:14px 18px;color:white;font-weight:800;background:linear-gradient(100deg,var(--purple),var(--pink));box-shadow:0 8px 24px #8b5cf633}.primary:hover{filter:brightness(1.1)}.secondary{border:1px solid var(--line);background:#1a2032;color:var(--text);border-radius:10px;padding:10px 13px}
+    .preview{min-height:310px;border:1px dashed #48516d;border-radius:16px;background:radial-gradient(ellipse at center,#272044,#0b0f1b 70%);display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;overflow:hidden}.preview video,.preview audio{max-width:100%;width:100%}.placeholder .orb{font-size:50px;margin-bottom:10px}.placeholder p{color:var(--muted);font-size:13px;line-height:1.6}.status{margin-top:14px;padding:12px;border-radius:12px;background:#0b1020;color:#c4b5fd;font-size:12px;line-height:1.6;display:none}.result{margin-top:18px;display:none}.result pre{white-space:pre-wrap;word-break:break-word;background:#0b1020;border:1px solid var(--line);padding:14px;border-radius:12px;color:#d7dcf0;font-size:12px;line-height:1.6}.result-actions{display:flex;gap:8px;flex-wrap:wrap}.upload{display:block;border:1px dashed #59627d;padding:12px;border-radius:12px;color:var(--muted);font-size:12px}.upload input{display:block;width:100%;margin-top:8px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.feature{background:#111626;border:1px solid var(--line);padding:15px;border-radius:14px}.feature b{display:block;font-size:13px;margin:7px 0}.feature span{font-size:12px;color:var(--muted);line-height:1.5}.note{font-size:11px;color:var(--muted);line-height:1.6;margin-top:14px}footer{text-align:center;color:#77819b;font-size:11px;padding:28px 0 10px}
+    @media(max-width:760px){.wrap{padding:16px}.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}.card{padding:17px}.hero{margin-top:12px}.row{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo">♫</div><span>DOM AI STUDIO</span></div>
+    <span class="tag">CREATIVE AI PLATFORM</span>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Create • Imagine • Produce</div>
+    <h1>Turn your ideas into<br>music & video.</h1>
+    <p>Studio kreatif untuk menyiapkan konsep lagu, lirik, dan ide video dalam satu tempat. Tulis ide Anda, atur suasana, lalu buat brief kreatif.</p>
+  </section>
+
+  <main class="grid">
+    <section class="card">
+      <h2>✍️ Buat proyek baru</h2>
+      <p class="sub">Ceritakan ide musik atau video yang ingin Anda buat.</p>
+      <div class="field">
+        <label for="prompt">Ide / deskripsi proyek</label>
+        <textarea id="prompt" placeholder="Contoh: Lagu pop elektronik tentang semangat mengejar mimpi, dengan video musik bernuansa futuristik..."></textarea>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="type">Jenis proyek</label>
+          <select id="type"><option>Musik + Video</option><option>Musik saja</option><option>Video musik</option><option>Ide lirik lagu</option></select>
+        </div>
+        <div class="field">
+          <label for="genre">Genre / gaya</label>
+          <select id="genre"><option>Pop</option><option>Pop elektronik</option><option>Hip-hop</option><option>R&B</option><option>Rock</option><option>EDM</option><option>Dangdut</option><option>Akustik</option><option>Eksperimental</option></select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="mood">Suasana</label>
+          <select id="mood"><option>Inspiratif</option><option>Bahagia</option><option>Romantis</option><option>Melankolis</option><option>Energik</option><option>Misterius</option><option>Tenang</option></select>
+        </div>
+        <div class="field">
+          <label for="language">Bahasa</label>
+          <select id="language"><option>Indonesia</option><option>English</option><option>Jawa</option><option>Campuran</option><option>Instrumental</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="duration">Durasi target</label>
+        <select id="duration"><option>30 detik</option><option>1 menit</option><option selected>2–3 menit</option><option>3–4 menit</option><option>5 menit atau lebih</option></select>
+      </div>
+      <button class="primary" id="create">✨ Buat creative brief</button>
+      <div class="status" id="status" role="status"></div>
+      <div class="result" id="result">
+        <h2>Creative brief Anda</h2>
+        <pre id="brief"></pre>
+        <div class="result-actions"><button class="secondary" id="copy">Salin brief</button><button class="secondary" id="download">Unduh TXT</button></div>
+      </div>
+      <p class="note">Catatan: versi awal ini membuat konsep/brief di browser. Untuk menghasilkan audio atau video AI sungguhan, hubungkan layanan AI melalui backend dan API key yang aman. Jangan letakkan API key rahasia di file HTML publik.</p>
+    </section>
+
+    <section class="card">
+      <h2>🎬 Preview studio</h2>
+      <p class="sub">Pratinjau file audio atau video milik Anda.</p>
+      <div class="preview" id="preview">
+        <div class="placeholder"><div class="orb">🎧</div><b>Studio preview</b><p>Unggah file audio atau video untuk melihat pratinjau di sini.</p></div>
+      </div>
+      <div class="field">
+        <label for="media">Pilih audio / video</label>
+        <label class="upload">Pilih file dari perangkat Anda
+          <input id="media" type="file" accept="audio/*,video/*">
+        </label>
+      </div>
+      <div class="features">
+        <div class="feature"><div>🎼</div><b>Music concept</b><span>Susun ide lagu dan arahan genre.</span></div>
+        <div class="feature"><div>📝</div><b>Lyric direction</b><span>Rancang tema dan pesan lirik.</span></div>
+        <div class="feature"><div>🎥</div><b>Video direction</b><span>Siapkan konsep visual dan adegan.</span></div>
+      </div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> DOM AI Music Video Studio · Made for creators</footer>
+</div>
+<script>
+  const $ = (id) => document.getElementById(id);
+  let currentBrief = "";
+  $("year").textContent = new Date().getFullYear();
+
+  $("create").addEventListener("click", () => {
+    const idea = $("prompt").value.trim();
+    if (!idea) {
+      $("status").style.display = "block";
+      $("status").textContent = "Silakan tulis ide proyek terlebih dahulu.";
+      $("prompt").focus();
+      return;
+    }
+    currentBrief = [
+      "DOM AI MUSIC VIDEO STUDIO — CREATIVE BRIEF",
+      "",
+      "IDE PROYEK: " + idea,
+      "JENIS: " + $("type").value,
+      "GENRE / GAYA: " + $("genre").value,
+      "SUASANA: " + $("mood").value,
+      "BAHASA: " + $("language").value,
+      "DURASI: " + $("duration").value,
+      "",
+      "ARAHAN MUSIK:",
+      "Buat aransemen yang sesuai dengan genre dan suasana di atas. Tentukan tempo, instrumen utama, dinamika, serta struktur intro, verse, chorus, bridge, dan outro sesuai kebutuhan.",
+      "",
+      "ARAHAN LIRIK:",
+      "Kembangkan ide utama menjadi lirik yang orisinal, memiliki pesan yang jelas, hook yang mudah diingat, dan bahasa yang natural.",
+      "",
+      "ARAHAN VIDEO:",
+      "Buat storyboard dengan pembuka yang menarik, visual konsisten, beberapa adegan utama, transisi yang halus, dan penutup yang kuat.",
+      "",
+      "CATATAN PRODUKSI:",
+      "Sesuaikan hasil akhir dengan durasi target. Pastikan musik, lirik, dan visual memiliki tema yang selaras."
+    ].join("\n");
+    $("brief").textContent = currentBrief;
+    $("result").style.display = "block";
+    $("status").style.display = "block";
+    $("status").textContent = "Creative brief berhasil dibuat. Ini adalah konsep proyek, bukan file audio/video hasil generasi AI.";
+    $("result").scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+
+  $("copy").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(currentBrief);
+      $("status").textContent = "Brief berhasil disalin.";
+    } catch (e) {
+      $("status").textContent = "Clipboard tidak tersedia. Pilih dan salin teks brief secara manual.";
+    }
+  });
+
+  $("download").addEventListener("click", () => {
+    const blob = new Blob([currentBrief], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "dom-ai-creative-brief.txt"; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  $("media").addEventListener("change", (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const isVideo = file.type.startsWith("video/");
+    $("preview").innerHTML = "";
+    const player = document.createElement(isVideo ? "video" : "audio");
+    player.src = url; player.controls = true;
+    if (isVideo) player.playsInline = true;
+    $("preview").appendChild(player);
+    $("status").style.display = "block";
+    $("status").textContent = "Memutar pratinjau lokal: " + file.name;
+  });
+</script>
+</body>
+</html>
